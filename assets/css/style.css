@@ -1,0 +1,53 @@
+.app {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.mob-table {
+	max-width: 1220px;
+	padding: 20px 25px;
+	background-color: #fff;
+	margin: 30px 0;
+	border-radius: 3px;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.headers {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: #435d7d;
+	color: #fff;
+	padding: 16px 30px;
+}
+
+.add {
+	background-color: #5cb85c;
+	color: white;
+}
+
+.cards {
+	margin-top: 50px;
+	display: flex;
+	justify-content: space-around;
+	flex-wrap: wrap;
+}
+
+.card {
+	margin-top: 15px;
+	width: 33.333%;
+}
+
+.edit {
+	background-color: #5cb85c;
+	color: white;
+}
+
+.delete {
+	background-color: red;
+	color: #000;
+}
+
+@media screen and (max-width: 1199.98px) {
+}
