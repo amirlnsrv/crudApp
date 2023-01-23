@@ -49,7 +49,7 @@ form.addEventListener("submit", (e) => {
             <h5>${studentsData.surname}</h5>
             <h6>${studentsData.age}</h6>
 						<p class="card-text">${studentsData.about}</p>
-						<button class="btn edit" onclick="editCard(this)" data-bs-toggle="modal" data-bs-target="#form">Изменить</button>
+						<button class="btn edit" id="${studentsData.id}" data-bs-toggle="modal" data-bs-target="#form">Изменить</button>
 						<button class="btn delete" id=${studentsData.id}>Удалить</button>
 					</div>
 				</div>
@@ -82,7 +82,7 @@ async function render() {
 						<h5 class="card-surname">${student.surname}</h5>
 						<h6 class="card-age">${student.age}</h6>
 						<p class="card-text">${student.about}</p>
-						<button class="btn edit" onclick="editCard(this)" data-bs-toggle="modal" data-bs-target="#form">Изменить</button>
+						<button class="btn edit" id="${student.id}" data-bs-toggle="modal" data-bs-target="#form">Изменить</button>
 						<button class="btn delete" id="${student.id}">Удалить</button>
 					</div>
 			</div>
@@ -91,48 +91,41 @@ async function render() {
     );
 }
 
-// Delete
-// let deleteCard = (e) => {
-//   // let selectedCard = e.parentElement.parentElement;
+// Delete card
+deleteCard();
+function deleteCard() {
+  document.addEventListener("click", (e) => {
+    if (e.target.classList.contains("delete")) {
+      let id = e.target.id;
+      fetch(`${URL}/${id}`, {
+        method: "DELETE",
+      });
+      e.target.parentElement.parentElement.remove();
+    }
+  });
+}
 
-//   // fetch(`${URL}/${e.id}`, {
-//   //   method: "DELETE",
-//   //   headers: {
-//   //     "Content-Type": "application/json; charset=utf-8",
-//   //   },
-//   // }).then((response) => response.json());
-//   // selectedCard.remove();
-
-//   if (e.target.classList.contains("deleteCard")) {
-//     let id = e.target.id;
-//     fetch(`${URL}/${id}`, {
-//       method: "DELETE",
-//     }).then(() => render());
-//   }
-// };
-
-// Delete from DB
-document.addEventListener("click", (e) => {
-  if (e.target.classList.contains("delete")) {
+// Edit
+document.addEventListener("click", function (e) {
+  if (e.target.classList.contains("edit")) {
     let id = e.target.id;
+    console.log(id);
     fetch(`${URL}/${id}`, {
       method: "DELETE",
     });
+
+    let selectedCard = e.target.parentElement;
+    e.target.parentElement.parentElement.remove();
+
+    nameInput.value = selectedCard.children[0].innerHTML;
+    surnameInput.value = selectedCard.children[1].innerHTML;
+    ageInput.value = selectedCard.children[2].innerHTML;
+    aboutInput.value = selectedCard.children[3].innerHTML;
+    imgInput.value = selectedCard.children[4].innerHTML;
+
+    console.log(selectedCard);
   }
 });
-
-// Edit
-let editCard = (e) => {
-  let selectedCard = e.parentElement;
-
-  nameInput.value = selectedCard.children[0].innerHTML;
-  surnameInput.value = selectedCard.children[1].innerHTML;
-  ageInput.value = selectedCard.children[2].innerHTML;
-  aboutInput.value = selectedCard.children[3].innerHTML;
-  imgInput.value = selectedCard.children[4].innerHTML;
-
-  deleteCard(e);
-};
 
 fetch(`${URL}`)
   .then((response) => response.json())

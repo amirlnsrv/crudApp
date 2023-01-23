@@ -1,3 +1,12 @@
 {
-  "students": []
+  "students": [
+    {
+      "name": "Amir",
+      "surname": "Lansarov",
+      "age": "17",
+      "about": "lorem ipsum dolor",
+      "img": "https://place-hold.it/300x400",
+      "id": 1
+    }
+  ]
 }
